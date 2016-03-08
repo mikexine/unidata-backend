@@ -64,14 +64,17 @@ def crossdomain(origin=None, methods=None, headers=None,
     return decorator
 
 
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/contacts')
+@app.route('/docs/')
+def docs():
+    return render_template('docs.html')
+
+
+@app.route('/contacts/')
 def contacts():
     return render_template('contacts.html')
 

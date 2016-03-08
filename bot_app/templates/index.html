@@ -1,315 +1,34 @@
+<!-- extend base layout -->
 {% extends "base.html" %}
 
 {% block content %}
+<h1>Unitaly</h1>
+<p>The aim of this project is to collect data from various universities - starting with the Italian ones - elaborate this data and make them available to anyone, in a simple JSON format.</p>
+<p>Some data that are available may be not so useful (<a href="http://unidata.xyz/api/unipd/udupadova">example</a>) - but they are used by <a href="https://telegram.me/unipdbot">@UnipdBot</a>. </p>
+<p>You can find the docs of the available API calls <a href="docs">here.</a></p>
+<hr />
 
-<div class="row">
-    <h1>Unitaly Data Api</h1>
-    <p>Description of available methods.</p>
-    <p>For all API calls, you should set the
-        <code>content-type</code> in the call's header to
-        <code>application/json</code>.</p>
-        <p>No authentication required. Read-only access.</p>
-        <p>Available methods:</p>
-        <ul>
-            <li>
-                <p><a href="#api">/api:</a> available universities</p> 
-            </li>
-            <li>
-                <p><a href="#uni_ID">/api/uni_ID:</a> available data for each University</p> 
-            </li>
-            <li>
-                <p><a href="#uni_ID_mensa">/api/uni_ID/mensa:</a> canteen data for a selected University.</p>
-            </li>
-            <li>
-                <p><a href="#uni_ID_biblioteca">/api/uni_ID/biblioteca: </a> library data for a selected University.</p>
-            </li>
-            <li>
-                <p><a href="#uni_ID_aulastudio">/api/uni_ID/aulastudio: </a> study rooms data for a selected University</p>
-                </li>
-            <li>
-                <p><a href="#uni_ID_single_data">/api/uni_ID/which_data/data_ID: </a> data about a single study room, library or canteen in a selected University.</p>
-            </li>
-        </ul>
-        <p></p>
+<h3 align="center">Related projects:</h3>
+<p>These projects are using unidata.xyz:</p>
+<li><p><a href="https://telegram.me/unipdbot">@UnipdBot</a> Telegram Bot.</p></li>
+<li><p><a href="https://play.google.com/apps/testing/com.ionicframework.unipd967659" target="_blank">Unipd App</a>: Ionic app, now available in Alpha mode for android. iOS version is not available yet - the Apple's license is expensive!</p></li>
 
-        <br />
-        <hr />
 
-<h2 id="api">/api</h2>
-<p>Endpoint: <code>/api</code> - full url: <code>http://unidata.xyz/api</code>.</p>
-<p>It will return data about the currently supported universities and the data available for each University.</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Header Parameter</th>
-            <th>Set to</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>content-type</code></td>
-            <td><code>application/json</code></td>
-        </tr>
-    </tbody>
-</table>
-<p>Example response is the following: </p>
-<pre>
-{
-    "unipd": [
-    "dirittostudio",
-    "udupadova",
-    "biblioteca",
-    "mensa",
-    "aulastudio"
-    ],
-    "univr": [
-    "biblioteca",
-    "mensa",
-    "aulastudio"
-    ]
-}
-</pre>
-        <br />
-        <hr />
-<h2 id="uni_ID">/api/uni_ID</h2>
-<p>Endpoint: <code>/api/uni_ID</code> - full url: <code>http://unidata.xyz/api/uni_ID</code>.</p>
-<p>This call will return the list of available data for a certain University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/univr</code>.</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Header Parameter</th>
-            <th>Set to</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>content-type</code></td>
-            <td><code>application/json</code></td>
-        </tr>
-    </tbody>
-</table>
-<p>Example response is the following: </p>
-<pre>
-{
-  "data": [
-    "biblioteca",
-    "mensa",
-    "aulastudio"
-  ]
-}
-</pre>
-        <br />
-        <hr />
-<h2 id="uni_ID_mensa">/api/uni_ID/mensa</h2>
-<p>Endpoint: <code>/api/uni_ID/mensa</code> - full url: <code>http://unidata.xyz/api/uni_ID/mensa</code>.</p>
-<p>This api call will return data about all the canteens of the selected University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/unipd/mensa</code>.</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Header Parameter</th>
-            <th>Set to</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>content-type</code></td>
-            <td><code>application/json</code></td>
-        </tr>
-    </tbody>
-</table>
-<p>Example response is the following: </p>
-<pre>
-{
-  "acli": {
-    "calendario": {
-      "cena": 1,
-      "pranzo": 1
-    },
-    "coord": {
-      "lat": 45.405255,
-      "lon": 11.871526
-    },
-    "indirizzo": "Via Bonporti, 20",
-    "menu": {
-      "contorno": [
-        "Crocchette* di Patate",
-        "Cavolfiori* all'Olio Extravergine",
-        "Insalata Mista Fresca"
-      ],
-      "dessert": [
-        "Mele, Arance e Banane",
-        "Gelato, Yogurt e Budino",
-        "Caffè Lavazza"
-      ],
-      "primo": [
-        "Cellentani con Pesto e Peperoni ",
-        "Caserecce al Ragù di Tacchino ",
-        "Caserecce e Riso Bollito al Pomodoro e all'Olio Extravergine ",
-        "Zuppa di Cipolla "
-      ],
-      "secondo": [
-        "Bistecca di Manzo alla Griglia",
-        "Arista di Maiale ai Funghi",
-        "Filetto di Tilapia* in Guazzetto"
-      ]
-    },
-    "nome": "Acli - Pio X",
-    "orari": "11:45 - 14:30, 18:45 - 21:00",
-    "telefono": "049 8762255"
-  },
-  "agripolis": { .. },
-  ".." : {..}
-}
-</pre>
+<hr />
 
-        <br />
-        <hr />
-<h2 id="uni_ID_biblioteca">/api/uni_ID/biblioteca</h2>
-<p>Endpoint: <code>/api/uni_ID/biblioteca</code> - full url: <code>http://unidata.xyz/api/uni_ID/biblioteca</code>.</p>
-<p>This api call will return data about all the libraries of the selected University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/unipd/biblioteca</code>.</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Header Parameter</th>
-            <th>Set to</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>content-type</code></td>
-            <td><code>application/json</code></td>
-        </tr>
-    </tbody>
-</table>
-<p>Example response is the following: </p>
-<pre>
-{
-  "agribiblio": {
-    "coord": {
-      "lat": 45.353451,
-      "lon": 11.951161
-    },
-    "indirizzo": "Viale dell'Università, 16 - Legnaro",
-    "nome": "Biblioteca di Agripolis - Pietro Arduino",
-    "orari": {
-      "0": "08:20 - 18:00",
-      "1": "08:20 - 18:00",
-      "2": "08:20 - 18:00",
-      "3": "08:20 - 18:00",
-      "4": "08:20 - 18:00",
-      "5": "",
-      "6": ""
-    },
-    "orario": "Lunedì - Venerdì: 08:20 - 18:00"
-  },
-  "bibliochimica": {..},
-  ".." : {..}
-}
-</pre>
 
-        <br />
-        <hr />
-<h2 id="uni_ID_aulastudio">/api/uni_ID/aulastudio</h2>
-<p>Endpoint: <code>/api/uni_ID/aulastudio</code> - full url: <code>http://unidata.xyz/api/uni_ID/aulastudio</code>.</p>
-<p>This api call will return data about all the study rooms of the selected University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/unipd/aulastudio</code>.</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Header Parameter</th>
-            <th>Set to</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>content-type</code></td>
-            <td><code>application/json</code></td>
-        </tr>
-    </tbody>
-</table>
-<p>Example response is the following: </p>
-<pre>
-{
-  "galilei": {
-    "coord": {
-      "lat": 45.403446,
-      "lon": 11.87996
-    },
-    "indirizzo": "Via Galilei, 42",
-    "nome": "Galilei",
-    "orari": {
-      "0": "08:30 - 20:00",
-      "1": "08:30 - 20:00",
-      "2": "08:30 - 20:00",
-      "3": "08:30 - 20:00",
-      "4": "08:30 - 20:00",
-      "5": "",
-      "6": ""
-    },
-    "orario": "Lunedì - Venerdì: 08:30 - 20:00",
-    "posti": "280",
-    "tel": "049 8273909"
-  },
-  "jappelli": {..},
-  ".." : {..}
-</pre>
 
- <br />
-        <hr />
-<h2 id="uni_ID_single_data">/api/uni_ID/which_data/data_ID</h2>
-<p>Endpoint: <code>/api/uni_ID/which_data/data_ID</code> - full url: <code>http://unidata.xyz/api/uni_ID/which_data/data_ID</code>.</p>
-<p>This api call will return data about a single "structure" (library, canteen or study room) in a selected University. Remember: "uni_ID" must be the ID of an available University, "which_data" must be "mensa" or "aulastudio" or "biblioteca" and "data_ID" must be the ID of a selected structure (for example: "piovego", "jappelli"..). An example url is: <code>/api/unipd/mensa/piovego</code>.</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Header Parameter</th>
-            <th>Set to</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>content-type</code></td>
-            <td><code>application/json</code></td>
-        </tr>
-    </tbody>
-</table>
-<p>Example response (for the above example url) is the following: </p>
-<pre>
-{
-  "calendario": {
-    "cena": 0,
-    "pranzo": 1
-  },
-  "coord": {
-    "lat": 45.4109516,
-    "lon": 11.8896592
-  },
-  "indirizzo": "Viale Giuseppe Colombo, 1",
-  "menu": {
-    "contorno": [
-      "Patate prezzemolate",
-      "Buffet di verdure fresche",
-      "Piselli al tegame"
-    ],
-    "dessert": [
-      "Frutta assortita",
-      "Caffè",
-      "Sorbetto"
-    ],
-    "primo": [
-      "Pasta al pomodoro o ragù",
-      "Spadellata ",
-      "Riso all'inglese ",
-      "Crema di cavolfiori "
-    ],
-    "secondo": [
-      "Filetto di scorfano al limone *",
-      "Braciola di maiale alla griglia",
-      "Peperoni alla piemontese"
-    ]
-  },
-  "nome": "Piovego",
-  "orari": "11:30 - 14:30",
-  "telefono": "049 807 1530"
-}
-</pre>
-        {% endblock %}
+
+<h4 align="center">Want to help?</h4>
+<p>Help is very much appreciated, both with the data collection and with the code. Most of the data are static (libraries, study rooms) but some data are scraped daily from different websites (to get the current day's menu, for example).</p>
+
+<p>GitHub links: </p>
+<ul>
+<li><p><a href="https://github.com/mikexine/unidata-backend" target="_blank">unidata-backend on GitHub</a>.</p></li>
+<li><p><a href="https://github.com/mikexine/UnipdBot" target="_blank">UnipdBot on GitHub</a>.</p></li>
+<li><p><a href="https://github.com/mikexine/unipd-app" target="_blank">unipd-app on GitHub</a>.</p></li>
+</ul>
+<hr />
+<br />
+
+{% endblock %}
