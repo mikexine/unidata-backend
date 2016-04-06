@@ -59,7 +59,7 @@ def getmenu(mid):
                         if "h3" in menu[piatto]:
                             menu[piatto] = menu[piatto].replace(rep, ' ')
                             txt = menu[piatto][4:].split("<")[0]
-                            completo[portata].append(txt)
+                            completo[portata].append(txt.replace('*',''))
                 menu = []
         for key in completo:
             if completo[key] == []:
@@ -86,10 +86,8 @@ if cal is not None:
         a += 2
 else:
     for x in range(7):
-        mensaDict[mensaList[x]]['calendario'][
-            'pranzo'] = "errore su www.esupd.gov.it/"
-        mensaDict[mensaList[x]]['calendario'][
-            'cena'] = "errore su www.esupd.gov.it/"
+        mensaDict[mensaList[x]]['calendario']['pranzo'] = "errore su www.esupd.gov.it/"
+        mensaDict[mensaList[x]]['calendario']['cena'] = "errore su www.esupd.gov.it/"
         a += 2
 
 for x in range(7):

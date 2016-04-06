@@ -13,14 +13,14 @@ from fabric.contrib.files import exists
 local_app_dir = './bot_app'
 local_config_dir = './config'
 
-remote_app_dir = '/home/mikexine'
-remote_git_dir = '/home/mikexine/git'
+remote_app_dir = '/home/uniopen'
+remote_git_dir = '/home/uniopen/git'
 remote_flask_dir = remote_app_dir + '/bot_app'
 remote_nginx_dir = '/etc/nginx/sites-enabled'
 remote_supervisor_dir = '/etc/supervisor/conf.d'
 
-env.hosts = ['188.166.145.27']  # replace with IP address or hostname
-env.user = 'mikexine'
+env.hosts = ['52.58.83.94']  # replace with IP address or hostname
+env.user = 'uniopen'
 # env.password = 'blah!'
 
 
@@ -70,13 +70,13 @@ def configure_nginx():
     sudo('/etc/init.d/nginx start')
     if exists('/etc/nginx/sites-enabled/default'):
         sudo('rm /etc/nginx/sites-enabled/default')
-    if exists('/etc/nginx/sites-enabled/unipd') is False:
-        sudo('touch /etc/nginx/sites-available/unipd')
-        sudo('ln -s /etc/nginx/sites-available/unipd' +
-             ' /etc/nginx/sites-enabled/unipd')
+    if exists('/etc/nginx/sites-enabled/uniopen') is False:
+        sudo('touch /etc/nginx/sites-available/uniopen')
+        sudo('ln -s /etc/nginx/sites-available/uniopen' +
+             ' /etc/nginx/sites-enabled/uniopen')
     with lcd(local_config_dir):
         with cd(remote_nginx_dir):
-            put('./unipd', './', use_sudo=True)
+            put('./uniopen', './', use_sudo=True)
     sudo('/etc/init.d/nginx restart')
 
 
@@ -86,10 +86,10 @@ def configure_supervisor():
     2. Copy local config to remote config
     3. Register new command
     """
-    if exists('/etc/supervisor/conf.d/unipd.conf') is False:
+    if exists('/etc/supervisor/conf.d/uniopen.conf') is False:
         with lcd(local_config_dir):
             with cd(remote_supervisor_dir):
-                put('./unipd.conf', './', use_sudo=True)
+                put('./uniopen.conf', './', use_sudo=True)
                 sudo('supervisorctl reread')
                 sudo('supervisorctl update')
 
@@ -102,8 +102,8 @@ def configure_git():
     if exists(remote_git_dir) is False:
         sudo('mkdir ' + remote_git_dir)
         with cd(remote_git_dir):
-            sudo('mkdir unipd.git')
-            with cd('unipd.git'):
+            sudo('mkdir uniopen.git')
+            with cd('uniopen.git'):
                 sudo('git init --bare')
                 with lcd(local_config_dir):
                     with cd('hooks'):
@@ -114,7 +114,7 @@ def configure_git():
 def run_app():
     """ Run the app! """
     with cd(remote_flask_dir):
-        sudo('supervisorctl start unipd')
+        sudo('supervisorctl start uniopen-backend')
 
 
 def deploy():
@@ -127,7 +127,7 @@ def deploy():
         commit_message = prompt("Commit message?")
         local('git commit -am "{0}"'.format(commit_message))
         local('git push production master')
-        sudo('supervisorctl restart unipd')
+        sudo('supervisorctl restart uniopen-backend')
 
 
 def rollback():
@@ -138,7 +138,7 @@ def rollback():
     with lcd(local_app_dir):
         local('git revert master  --no-edit')
         local('git push production master')
-        sudo('supervisorctl restart unipd')
+        sudo('supervisorctl restart uniopen-backend')
 
 
 def status():

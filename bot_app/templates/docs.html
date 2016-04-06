@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>unidata Api</h1>
+    <h1>uniopen Api</h1>
     <p>Description of available methods.</p>
     <p>For all API calls, you should set the
         <code>content-type</code> in the call's header to
@@ -35,7 +35,7 @@
         <hr />
 
 <h2 id="api">/api</h2>
-<p>Endpoint: <code>/api</code> </p><p>Full url: <code>http://unidata.xyz/api</code></p>
+<p>Endpoint: <code>/api</code> </p><p>Full url: <code>http://uniopen.org/api</code></p>
 <p>It will return data about the currently supported universities and the data available for each University.</p>
 <table class="table">
     <thead>
@@ -71,7 +71,7 @@
         <br />
         <hr />
 <h2 id="uni_ID">/api/uni_ID</h2>
-<p>Endpoint: <code>/api/uni_ID</code> </p><p>Full url: <code>http://unidata.xyz/api/uni_ID</code></p>
+<p>Endpoint: <code>/api/uni_ID</code> </p><p>Full url: <code>http://uniopen.org/api/uni_ID</code></p>
 <p>This call will return the list of available data for a certain University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/univr</code></p>
 <table class="table">
     <thead>
@@ -100,7 +100,7 @@
         <br />
         <hr />
 <h2 id="uni_ID_mensa">/api/uni_ID/mensa</h2>
-<p>Endpoint: <code>/api/uni_ID/mensa</code> </p><p>Full url: <code>http://unidata.xyz/api/uni_ID/mensa</code></p>
+<p>Endpoint: <code>/api/uni_ID/mensa</code> </p><p>Full url: <code>http://uniopen.org/api/uni_ID/mensa</code></p>
 <p>This api call will return data about all the canteens of the selected University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/unipd/mensa</code></p>
 <table class="table">
     <thead>
@@ -164,7 +164,7 @@
         <br />
         <hr />
 <h2 id="uni_ID_biblioteca">/api/uni_ID/biblioteca</h2>
-<p>Endpoint: <code>/api/uni_ID/biblioteca</code> </p><p>Full url: <code>http://unidata.xyz/api/uni_ID/biblioteca</code></p>
+<p>Endpoint: <code>/api/uni_ID/biblioteca</code> </p><p>Full url: <code>http://uniopen.org/api/uni_ID/biblioteca</code></p>
 <p>This api call will return data about all the libraries of the selected University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/unipd/biblioteca</code></p>
 <table class="table">
     <thead>
@@ -209,7 +209,7 @@
         <br />
         <hr />
 <h2 id="uni_ID_aulastudio">/api/uni_ID/aulastudio</h2>
-<p>Endpoint: <code>/api/uni_ID/aulastudio</code> </p><p>Full url: <code>http://unidata.xyz/api/uni_ID/aulastudio</code></p>
+<p>Endpoint: <code>/api/uni_ID/aulastudio</code> </p><p>Full url: <code>http://uniopen.org/api/uni_ID/aulastudio</code></p>
 <p>This api call will return data about all the study rooms of the selected University. Remember: "uni_ID" must be the ID of an available University. Check available universities with the <a href="#api">/api</a> call. An example url is: <code>/api/unipd/aulastudio</code></p>
 <table class="table">
     <thead>
@@ -255,7 +255,7 @@
  <br />
         <hr />
 <h2 id="uni_ID_single_data">/api/uni_ID/which_data/data_ID</h2>
-<p>Endpoint: <code>/api/uni_ID/which_data/data_ID</code> </p><p>Full url: <code>http://unidata.xyz/api/uni_ID/which_data/data_ID</code></p>
+<p>Endpoint: <code>/api/uni_ID/which_data/data_ID</code> </p><p>Full url: <code>http://uniopen.org/api/uni_ID/which_data/data_ID</code></p>
 <p>This api call will return data about a single "structure" (library, canteen or study room) in a selected University. Remember: "uni_ID" must be the ID of an available University, "which_data" must be "mensa" or "aulastudio" or "biblioteca" and "data_ID" must be the ID of a selected structure (for example: "piovego", "jappelli"..). An example url is: <code>/api/unipd/mensa/piovego</code></p>
 <table class="table">
     <thead>
