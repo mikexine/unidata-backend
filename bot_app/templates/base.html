@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Open data from Italian universities.">
-    <meta name="author" content="info@uniopen.org">
+    <meta name="author" content="mikexine@gmail.com">
+<meta property="fb:app_id" content="1733051963609910" />
 
-    <title>uniopen</title>
+    <title>UniOpen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +36,7 @@
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
                         <a href="/">
-                            uniopen - home
+                            UniOpen - home
                         </a>
                     </li>
                     <li>
@@ -43,6 +44,9 @@
                     </li>
                     <li>
                         <a href="/contacts">Contact</a>
+                    </li>
+                    <li>
+                        <a href="http://uniorganization.org/" target="_blank">Uni Organization</a>
                     </li>
                 </ul>
             </div>
@@ -54,9 +58,11 @@
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="row">
-                                {% block content %}{% endblock %}
+                          {% block content %}{% endblock %}
                             </div>
                             <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> <a href="/" class="btn btn-default">Home</a>
+                             <div class="pull-right"><a href="http://uniorganization.org/" target="_blank"> <img src="/static/img/uniorganization-logo-full.png" width="140"> </a></div>
+
                         </div>
                     </div>
                 </div>
@@ -80,6 +86,35 @@
             });
         </script>
 
+<!-- <script type="text/javascript" id="cookiebanner"
+    src="//cookiebanner.eu/js/cookiebanner.min.js"
+    data-position="top"
+    data-accept-on-scroll="true"
+    data-accept-on-click="true"
+    data-fg="black"
+    data-bg="red"
+    data-link="white"
+    data-message="We use cookies to improve your browsing experience.">
+</script> -->
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10969890; 
+var sc_invisible=1; 
+var sc_security="7c5a7d37"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="shopify
+analytics ecommerce tracking"
+href="http://statcounter.com/shopify/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/10969890/0/7c5a7d37/1/"
+alt="shopify analytics ecommerce
+tracking"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
     </body>
 
     </html>
