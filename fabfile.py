@@ -123,7 +123,7 @@ def deploy():
     2. Restart gunicorn via supervisor
     """
     with lcd(local_app_dir):
-        local('git add -A')
+        local('git add -u')
         commit_message = prompt("Commit message?")
         local('git commit -am "{0}"'.format(commit_message))
         local('git push production master')
