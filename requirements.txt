@@ -3,6 +3,7 @@ beautifulsoup4==4.4.1
 ecdsa==0.13
 Fabric==1.10.2
 Flask==0.10.1
+future==0.15.2
 itsdangerous==0.24
 Jinja2==2.8
 lxml==3.5.0
@@ -11,6 +12,7 @@ paramiko==1.16.0
 pickleDB==0.6.2
 pycrypto==2.6.1
 python-dateutil==2.5.0
+python-telegram-bot==4.0.3
 requests==2.9.1
 simplejson==3.8.2
 six==1.10.0
