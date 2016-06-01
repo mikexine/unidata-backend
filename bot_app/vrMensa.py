@@ -19,7 +19,7 @@ def createMenuDict(txt):
     cenaDict = {}
 
     for i in range(6):
-        # print i
+        # print i
         pranzoDict[i] = {}
         giorno = '<td data-giorno="%s" data-tipo-piatto="1">' % (i+1)
         fine = '<td data-giorno="%s" data-tipo-piatto="1">' % (i+2)
@@ -173,16 +173,17 @@ def createMenuDict(txt):
 
 
 def cleanMenu(menuRaw):
-    for a in menuRaw:
-        for b in menuRaw[a]:
-            for c in menuRaw[a][b]:
-                del menuRaw[a][b][c][0]
-
     # print menuRaw
+    # for a in menuRaw:
+    #     for b in menuRaw[a]:
+    #         for c in menuRaw[a][b]:
+    #             del menuRaw[a][b][c][0]
+
+    print '---------------------------------------------'
+    print menuRaw
     menu = {}
     for i in range(7):
         menu[i] = {}
-
         menu[i]['pranzo'] = menuRaw['pranzo'][i]
         menu[i]['cena'] = menuRaw['cena'][i]
 
@@ -190,14 +191,16 @@ def cleanMenu(menuRaw):
     for i in range(7):
         for j in menu[i]['pranzo']:
             for k in range(len(menu[i]['pranzo'][j])):
-                menu[i]['pranzo'][j][k] = menu[i]['pranzo'][j][k].replace('\n', '')
+                menu[i]['pranzo'][j][k] = menu[i]['pranzo'][j][k].replace('\n', ', ')
                 menu[i]['pranzo'][j][k] = menu[i]['pranzo'][j][k].replace('*', '')
+                menu[i]['pranzo'][j][k] = menu[i]['pranzo'][j][k][2:]
 
     for i in range(7):
         for j in menu[i]['cena']:
             for k in range(len(menu[i]['cena'][j])):
-                menu[i]['cena'][j][k] = menu[i]['cena'][j][k].replace('\n', '')
+                menu[i]['cena'][j][k] = menu[i]['cena'][j][k].replace('\n', ', ')
                 menu[i]['cena'][j][k] = menu[i]['cena'][j][k].replace('*', '')
+                menu[i]['cena'][j][k] = menu[i]['cena'][j][k][2:]
 
     return menu
 
@@ -221,5 +224,6 @@ def makeRequest():
 
     session = requests.Session()
     response = session.post(url, data=payload, headers=headers).json()
+    # print response
     txt = response['visualizzazione_settimanale'].encode('ascii', 'ignore')
     return txt

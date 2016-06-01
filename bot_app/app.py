@@ -6,6 +6,7 @@ from pyUnipd import pyUnipd
 import os
 from datetime import timedelta
 from functools import update_wrapper
+from telegram import Bot
 
 # initialize pyUnipd get configs from settings.ini
 pyUni = pyUnipd()

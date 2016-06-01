@@ -8,6 +8,8 @@ import json
 import arrow
 import ConfigParser
 import pickledb
+from telegram import Bot
+
 
 db = pickledb.load('uni.db', True)
 
@@ -101,6 +103,16 @@ unipdDict['mensa'] = mensaDict
 
 db.set('unipd', unipdDict)
 db.dump()
+
+
+config = ConfigParser.ConfigParser()
+config.read('settings.ini')
+token = str(config.get('main', 'token'))
+ch_id = "27002116"
+starter = Bot(token=token)
+txt = "bot_app unipd database updated"
+starter.sendMessage(ch_id, text=txt)
+
 
 # data[1]['mensa'] = mensaDict
 # r = requests.put("http://unipd.xyz/mensa/" + mensaID,
