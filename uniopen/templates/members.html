@@ -3,17 +3,14 @@
 {% block content %}
     <h1>Welcome {{ session.username }}</h1>
     <h3>This is the members-only page.</h3>
-    <h3>Let's add a new uni!</h3>
-    <form class="form form-adduniversity" method="POST" action="" role="form">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{form.shortname.label}}
-                {{form.shortname(placeholder="Short uni name", class_="form-control")}}
-            </div>
-            <div class="form-group">
-                {{form.fullname.label}}
-                {{form.fullname(placeholder="Full uni name", class_="form-control")}}
-            </div>
-            <p><input class="btn btn-default btn-submit" type="submit" value="Register"></p>
-    </form>
+
+<table class="table">
+{% for uni in unilist %}
+<tr>
+   <td class="c2">{{uni.shortname}}</TD>
+   <td class="c3">{{uni.fullname}}</TD>
+</tr>
+{% endfor %}
+</table>
+
 {% endblock %}

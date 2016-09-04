@@ -17,13 +17,17 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
-      <li><a href="{{ url_for('about') }}">About</a></li>
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('docs') }}">Docs</a></li>
     </ul>
     {% if session.logged_in %}
-    <a class="btn btn-default btn-sm navbar-btn navbar-right" href="{{ url_for('logout') }}">Log out</a>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{ url_for('members') }}">Logged in as {{ session.username }}</a></li>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ url_for('members') }}">Logged in as {{ session.username }}</a></li>
+              <a class="btn btn-default btn-sm navbar-btn navbar-right" href="{{ url_for('logout') }}">Log out</a>
+
+          </ul>
+    <ul class="nav navbar-nav">
+      <a class="btn btn-default btn-sm navbar-btn" href="{{ url_for('members') }}">Members area</a>
     </ul>
     {% elif form %}
     <ul class="nav navbar-nav navbar-right">
