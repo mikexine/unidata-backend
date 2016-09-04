@@ -4,7 +4,7 @@ import subprocess
 from flask.ext.script import Manager, Shell, Server
 from uniopen import models
 from uniopen.main import app, db
-
+from flask_migrate import Migrate, MigrateCommand
 manager = Manager(app)
 TEST_CMD = "nosetests"
 
@@ -27,6 +27,7 @@ def createdb():
 
 manager.add_command("runserver", Server())
 manager.add_command("shell", Shell(make_context=_make_context))
+manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
     manager.run()
