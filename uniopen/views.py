@@ -28,6 +28,14 @@ def home():
 @app.route("/members/", methods=['GET', 'POST'])
 @login_required
 def members():
+    unilist = University.query.all()
+    print unilist[0].shortname
+    return render_template("members.html", unilist=unilist)
+
+
+@app.route("/adduniversity/", methods=['GET', 'POST'])
+@login_required
+def adduniversity():
     form = AddUniversityForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
         new_uni = University(form.shortname.data, form.fullname.data)
@@ -38,10 +46,10 @@ def members():
             return redirect(url_for('members'))
         except IntegrityError as err:
             print(err)
-            flash("That username and/or email already exists. Try again.", 'error')
+            flash("That uni already exists. Try again.", 'error')
     else:
         flash_errors(form)
-    return render_template("members.html", form=form)
+    return render_template("adduniversity.html", form=form)
 
 
 @app.route('/logout/')
@@ -69,10 +77,10 @@ def register():
     return render_template('register.html', form=form)
 
 
-@app.route("/about/")
-def about():
+@app.route("/docs/")
+def docs():
     form = LoginForm(request.form)
-    return render_template("about.html", form=form)
+    return render_template("docs.html")
 
 
 @app.errorhandler(404)
