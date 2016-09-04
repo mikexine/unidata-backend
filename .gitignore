@@ -52,3 +52,4 @@ env*
 
 # Database
 *.db
+migrations/
