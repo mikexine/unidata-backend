@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask_wtf import Form
-from wtforms import TextField, PasswordField
+from wtforms import TextField, PasswordField, DecimalField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 class RegisterForm(Form):
@@ -21,3 +21,12 @@ class AddUniversityForm(Form):
     shortname = TextField('Short university name', validators=[DataRequired()])
     fullname = TextField('Full name', validators=[DataRequired()])
     address = TextField('Main address')
+
+
+class AddStudyRoomForm(Form):
+    shortname = TextField('Short name', validators=[DataRequired()])
+    fullname = TextField('Full name', validators=[DataRequired()])
+    seats = TextField('Number of seats')
+    address = TextField('Main address')
+    texthours = TextField('Opening hours')
+    phone = TextField('Phone number')

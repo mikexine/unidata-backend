@@ -1,0 +1,31 @@
+
+{% extends "_layouts/base.html" %}
+{% block content %}
+    <h1>Welcome {{ session.username }}</h1>
+    <h3>List of available study rooms:</h3>
+<br/>
+<table class="table table-striped">
+ <tr>
+    <th>Short-ID</th>
+    <th>Full Name</th>
+    <th>Address</th>
+    <th>Canteens?</th>
+    <th>Study rooms?</th>
+    <th>Libraries?</th>
+    <th>Editor</th>
+  </tr>
+{% for sr in studylist %}
+<tr>
+   <td>{{sr.shortname}}</TD>
+   <td>{{sr.fullname}}</TD>
+   <td>{{sr.address}}</TD>
+   <td>{{sr.seats}}</TD>
+   <td>{{sr.texthours}}</TD>
+   <td>{{sr.phone}}</TD>
+   <td><a href="editstudyroom/{{sr.id}}/" >Edit</a></TD>
+</tr>
+{% endfor %}
+</table>
+  <p><a href="addstudyroom/" class="btn btn-primary btn-large">Add a study room</a></p>
+
+{% endblock %}

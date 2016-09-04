@@ -1,0 +1,33 @@
+
+{% extends "_layouts/base.html" %}
+{% block content %}
+    <h3>Insert study room data</h3>
+    <form class="form form-adduniversity" method="POST" action="" role="form">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{form.shortname.label}}
+                {{form.shortname(placeholder="Short name", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.fullname.label}}
+                {{form.fullname(placeholder="Full name", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.seats.label}}
+                {{form.seats(placeholder="Number of seats", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.address.label}}
+                {{form.address(placeholder="Main address", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.texthours.label}}
+                {{form.texthours(placeholder="Opening hours", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.phone.label}}
+                {{form.phone(placeholder="Phone number", class_="form-control")}}
+            </div>
+            <p><input class="btn btn-default btn-submit" type="submit" value="Register"></p>
+    </form>
+{% endblock %}

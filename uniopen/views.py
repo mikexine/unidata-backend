@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 from flask import render_template, session, request, flash, redirect, url_for
 from .app import app, db
-from .models import User, University
-from .forms import RegisterForm, LoginForm, AddUniversityForm
+from .models import User, University, Studyroom
+from .forms import RegisterForm, LoginForm, AddUniversityForm, AddStudyRoomForm
 from .utils import flash_errors, login_required
 from sqlalchemy.exc import IntegrityError
 
@@ -29,8 +29,56 @@ def home():
 @login_required
 def members():
     unilist = University.query.all()
-    print unilist[0].shortname
+    # print unilist[0].shortname
     return render_template("members.html", unilist=unilist)
+
+
+@app.route("/studyrooms/<unid>/", methods=['GET', 'POST'])
+@login_required
+def studyrooms(unid):
+    studylist = db.session.query(Studyroom).filter_by(university_id=unid).all()
+    return render_template("studyrooms.html", studylist=studylist, unid=unid)
+
+
+@app.route("/studyrooms/<unid>/addstudyroom/", methods=['GET', 'POST'])
+@login_required
+def addstudyroom(unid):
+    form = AddStudyRoomForm(request.form, csrf_enabled=False)
+    if form.validate_on_submit():
+        new_sr = Studyroom(form.shortname.data, form.fullname.data, form.seats.data, form.address.data, form.texthours.data, form.phone.data)
+        currentuni = University.query.get(unid)
+        currentuni.studyrooms.append(new_sr)
+        try:
+            db.session.add(new_sr)
+            db.session.commit()
+            flash("Thank you for adding a new study room", 'success')
+            return redirect("/studyrooms/%s/" % unid)
+        except IntegrityError as err:
+            print(err)
+            flash("That study room already exists. Try again.", 'error')
+    else:
+        flash_errors(form)
+    return render_template("addstudyroom.html", form=form)
+
+
+@app.route("/studyrooms/<unid>/editstudyroom/<unisr>/", methods=['GET', 'POST'])
+@login_required
+def editstudyroom(unid, unisr):
+    currentsr = Studyroom.query.get(unisr)
+    form = AddStudyRoomForm(request.form, obj=currentsr, csrf_enabled=False)
+    if form.validate_on_submit():
+        form.populate_obj(currentsr)
+        new_sr = Studyroom(form.shortname.data, form.fullname.data, form.seats.data, form.address.data, form.texthours.data, form.phone.data)
+        try:
+            db.session.commit()
+            flash("Thank you for fixing the data!", 'success')
+            return redirect("/studyrooms/%s/" % unid)
+        except IntegrityError as err:
+            print(err)
+            flash("That study room already exists. Try again.", 'error')
+    else:
+        flash_errors(form)
+    return render_template("addstudyroom.html", form=form)
 
 
 @app.route("/adduniversity/", methods=['GET', 'POST'])
