@@ -20,3 +20,4 @@ class LoginForm(Form):
 class AddUniversityForm(Form):
     shortname = TextField('Short university name', validators=[DataRequired()])
     fullname = TextField('Full name', validators=[DataRequired()])
+    address = TextField('Main address')

@@ -38,11 +38,31 @@ def members():
 def adduniversity():
     form = AddUniversityForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
-        new_uni = University(form.shortname.data, form.fullname.data)
+        new_uni = University(form.shortname.data, form.fullname.data, form.address.data)
         try:
             db.session.add(new_uni)
             db.session.commit()
             flash("Thank you for adding a new uni", 'success')
+            return redirect(url_for('members'))
+        except IntegrityError as err:
+            print(err)
+            flash("That uni already exists. Try again.", 'error')
+    else:
+        flash_errors(form)
+    return render_template("adduniversity.html", form=form)
+
+
+@app.route("/edituniversity/<unid>/", methods=['GET', 'POST'])
+@login_required
+def edituniversity(unid):
+    currentuni = University.query.get(unid)
+    form = AddUniversityForm(request.form, obj=currentuni, csrf_enabled=False)
+    if form.validate_on_submit():
+        form.populate_obj(currentuni)
+        new_uni = University(form.shortname.data, form.fullname.data, form.address.data)
+        try:
+            db.session.commit()
+            flash("Thank you for fixing the data!", 'success')
             return redirect(url_for('members'))
         except IntegrityError as err:
             print(err)

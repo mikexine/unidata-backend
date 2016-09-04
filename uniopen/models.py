@@ -30,10 +30,12 @@ class University(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     shortname = db.Column(db.String, unique=True, nullable=False)
     fullname = db.Column(db.String, unique=True, nullable=False)
+    address = db.Column(db.String, default="")
 
-    def __init__(self, shortname=None, fullname=None):
+    def __init__(self, shortname=None, fullname=None, address=None):
         self.shortname = shortname
         self.fullname = fullname
+        self.address = address
 
     def __repr__(self):
         return '<Uni "{shortname}">'.format(shortname=self.shortname)
