@@ -2,15 +2,24 @@
 {% extends "_layouts/base.html" %}
 {% block content %}
     <h1>Welcome {{ session.username }}</h1>
-    <h3>This is the members-only page.</h3>
-
-<table class="table">
+    <h3>List of available universities:</h3>
+<br/>
+<table class="table table-striped">
+ <tr>
+    <th>Short-ID</th>
+    <th>Full Name</th>
+    <th>Address</th>
+    <th>Editor</th>
+  </tr>
 {% for uni in unilist %}
 <tr>
    <td class="c2">{{uni.shortname}}</TD>
    <td class="c3">{{uni.fullname}}</TD>
+   <td class="c4">{{uni.address}}</TD>
+   <td class="c5"><a href="/edituniversity/{{uni.id}}/" >Edit {{uni.id}}</a></TD>
 </tr>
 {% endfor %}
 </table>
+  <p><a href="{{ url_for('adduniversity') }}" class="btn btn-primary btn-large">Add a university</a></p>
 
 {% endblock %}

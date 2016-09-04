@@ -1,7 +1,7 @@
 
 {% extends "_layouts/base.html" %}
 {% block content %}
-    <h3>Let's add a new uni!</h3>
+    <h3>Insert university data</h3>
     <form class="form form-adduniversity" method="POST" action="" role="form">
             {{ form.hidden_tag() }}
             <div class="form-group">
@@ -11,6 +11,10 @@
             <div class="form-group">
                 {{form.fullname.label}}
                 {{form.fullname(placeholder="Full uni name", class_="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.address.label}}
+                {{form.address(placeholder="Main address", class_="form-control")}}
             </div>
             <p><input class="btn btn-default btn-submit" type="submit" value="Register"></p>
     </form>
