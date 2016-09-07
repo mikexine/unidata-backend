@@ -1,0 +1,2 @@
+#!/bin/sh
+GIT_WORK_TREE=/home/uniopen/bot_app git checkout -f

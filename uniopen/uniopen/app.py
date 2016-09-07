@@ -11,8 +11,7 @@ app = Flask(__name__)
 # The environment variable, either 'prod' or 'dev'
 env = os.environ.get("UNIOPEN_ENV", "prod")
 # Use the appropriate environment-specific settings
-app.config.from_object('uniopen.settings.{env}Config'
-                        .format(env=env.capitalize()))
+app.config.from_object('uniopen.settings.{env}Config'.format(env=env.capitalize()))
 app.config['ENV'] = env
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
